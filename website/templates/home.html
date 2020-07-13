@@ -3,16 +3,16 @@
     <div class="text-center">
         <h1>Welcome to Junk.ai</h1>
     </div>
-    <div class="row">
+    <nav class="row">
         <div class="col-lg-6 p-3">
-            <div class="text-center light-box p-4" onclick="window.location.href = '{{ url_for('main.text') }}'">
-                <p class="lead">Junk Mail Detection</p>
-            </div>
+            <a class="lead text-center light-box p-4" href="{{ url_for('main.text') }}">
+                Junk Mail Detection
+            </a>
         </div>
         <div class="col-lg-6 p-3">
-            <div class="text-center light-box p-4" onclick="window.location.href = '{{ url_for('main.image') }}'">
-                <p class="lead">Image Recognition</p>
-            </div>
+            <a class="lead text-center light-box p-4" href="{{ url_for('main.image') }}">
+                Image Recognition
+            </a>
         </div>
-    </div>
+    </nav>
 {% endblock content %}

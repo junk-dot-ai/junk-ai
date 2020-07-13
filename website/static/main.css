@@ -18,10 +18,16 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 10px;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
   height: 100%;
+	display: block;
+	transition-property: background-color, box-shadow, transform;
+	transition-duration: 0.25s;
 }
 
 .light-box:hover {
   background-color: #4A64FF;
+	color: white;
+	text-decoration: none;
+	transform: translateY(-2px);
   cursor: pointer;
   box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.2);
 }
@@ -39,12 +45,12 @@ h1, h2, h3, h4, h5, h6 {
     .container {
         width: 500px;
     }
-} 
+}
 @media (min-width: 992px) {
     .container {
         width: 600px;
     }
-} 
+}
 @media (min-width: 1200px) {
     .container {
         width: 700px;
