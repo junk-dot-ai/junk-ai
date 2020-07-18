@@ -1,2 +1,4 @@
+import os
+
 class Config:
-    pass
+    SECRET_KEY = os.urandom(32)

@@ -1,4 +1,6 @@
-from flask import render_template, Blueprint
+from flask import flash, redirect, url_for, render_template, Blueprint
+from website.main.forms import JunkMailForm
+from models.junk_mail.junk_mail import predict_junk
 
 
 main = Blueprint('main', __name__)
@@ -8,9 +10,16 @@ main = Blueprint('main', __name__)
 def home():
     return render_template('home.html', title="Home")
 
-@main.route("/text")
+@main.route("/text", methods=['GET', 'POST'])
 def text():
-    return render_template('junk_mail.html', title="Junk Mail AI")
+    form = JunkMailForm()
+    if form.validate_on_submit():
+        if (predict_junk(form.content.data) > 0.5):
+            flash("Junk!", "danger")
+        else:
+            flash("Not Junk!", "success")
+        return redirect(url_for('main.text'))
+    return render_template('junk_mail.html', title="Junk Mail AI", form=form)
 
 @main.route("/image")
 def image():
