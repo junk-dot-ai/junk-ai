@@ -23,4 +23,4 @@ def text():
 
 @main.route("/image")
 def image():
-    return render_template('image_rec.html', title="Image AI")
+    return render_template('image_classifier.html', title="Image AI")

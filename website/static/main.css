@@ -1,9 +1,9 @@
 body {
 	background: #E2EAF0;
 	color: #333333;
-	margin-top: 5rem;
+	margin-top: 20px;
 
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Lora', serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,13 +11,30 @@ h1, h2, h3, h4, h5, h6 {
 	color: #444444;
 }
 
+a, a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+i {
+  color: #010057;
+  transition-property: color, text-shadow;
+  transition-duration: 0.2s;
+}
+
+i:hover {
+  color: #0200A9;
+  text-shadow: 2px 2px 2px #B4B4B4;
+}
+
 .light-box {
   display: block;
   border-style: solid;
   border-width: 3px;
   border-color: #010057;
-  border-radius: 15px;
+  border-radius: 5px;
   height: 100%;
+  text-decoration: none;
 
   background-color: #010057;
   color: white;
@@ -27,9 +44,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .light-box:hover {
   cursor: pointer;
-	text-decoration: none;
 
-	background-color: #CCDFFF;
+	background-color: #DAE8FE;
   color: black;
   transform: translateY(-2px);
 }
@@ -39,22 +55,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: 576px) {
-	.container {
-		width: 400px;
-	}
+  body {
+    margin-top: 80px;
+  }
 }
 @media (min-width: 768px) {
-    .container {
-        width: 500px;
-    }
-}
-@media (min-width: 992px) {
-    .container {
-        width: 600px;
-    }
-}
-@media (min-width: 1200px) {
-    .container {
-        width: 700px;
-    }
+  .container {
+    width: 700px;
+  }
 }
