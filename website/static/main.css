@@ -12,28 +12,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .light-box {
-  background-color: #0042FF;
-  color: #FFFFFF;
+  display: block;
+  border-style: solid;
   border-width: 3px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+  border-color: #010057;
+  border-radius: 15px;
   height: 100%;
-	display: block;
-	transition-property: background-color, box-shadow, transform;
-	transition-duration: 0.25s;
+
+  background-color: #010057;
+  color: white;
+	transition-property: background-color, color, transform;
+	transition-duration: 0.2s;
 }
 
 .light-box:hover {
-  background-color: #4A64FF;
-	color: white;
-	text-decoration: none;
-	transform: translateY(-2px);
   cursor: pointer;
-  box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.2);
+	text-decoration: none;
+
+	background-color: #CCDFFF;
+  color: black;
+  transform: translateY(-2px);
 }
 
-.light-box p {
-	margin-bottom: 0px;
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media (min-width: 576px) {

@@ -24,27 +24,27 @@ with open(tokenizer_open_path, 'rb') as handle:
 
 # ------ Preprocess: per email ------
 
-def remove_hyperlink(word):
-    return  re.sub(r"http\S+", "", word)
+def remove_hyperlink(email):
+    return  re.sub(r"http\S+", "", email)
 
-def to_lower(word):
-    result = word.lower()
+def to_lower(email):
+    result = email.lower()
     return result
 
-def remove_number(word):
-    result = re.sub(r'\d+', '', word)
+def remove_number(email):
+    result = re.sub(r'\d+', '', email)
     return result
 
-def remove_punctuation(word):
-    result = word.translate(str.maketrans(dict.fromkeys(string.punctuation)))
+def remove_punctuation(email):
+    result = email.translate(str.maketrans(dict.fromkeys(string.punctuation)))
     return result
 
-def remove_whitespace(word):
-    result = word.strip()
+def remove_whitespace(email):
+    result = email.strip()
     return result
 
-def replace_newline(word):
-    return word.replace('\n',' ')
+def replace_newline(email):
+    return email.replace('\n',' ')
 
 def clean_up_pipeline(sentence):
     cleaning_utils = [remove_hyperlink,
