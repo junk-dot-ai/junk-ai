@@ -6,4 +6,6 @@ Junk.ai
 `pip install -r requirements.txt`
 
 ### Run:
-`gunicorn run:app`
+With python: `python run.py`
+With gunicorn: `gunicorn run:app`
+(Running with `gunicorn --workers 1 run:app` may resolve issues relating to server CPU and RAM limits)
