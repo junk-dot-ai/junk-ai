@@ -1,6 +1,6 @@
 from flask import request, flash, redirect, url_for, render_template, Blueprint
 from website.main.forms import JunkMailForm
-from models.junk_mail.junk_mail import predict_junk
+from models.junk_mail import predict_junk
 
 
 main = Blueprint('main', __name__)
