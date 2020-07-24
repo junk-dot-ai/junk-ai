@@ -6,7 +6,7 @@ body {
 	font-family: 'Lora', serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, table {
 	font-family: 'Quicksand', sans-serif;
 	color: #444444;
 }
@@ -52,6 +52,29 @@ i:hover {
 
 .shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+td.with-bar {
+    position: relative;
+    padding-left: 0.5em;
+    color: white;
+    width: 100px;
+}
+td.with-bar::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: var(--width);
+    background: steelblue;
+    left: 0;
+    top: 0;
+}
+td.image-label {
+    font-weight: bold;
+    padding-right: 1em;
+}
+td.confidence {
+    text-align: center;
 }
 
 @media (min-width: 576px) {

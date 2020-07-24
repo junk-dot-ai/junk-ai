@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="bg-light shadow p-5">
+        <div class="d-flex justify-content-between">
+            <h1>Image Classifier</h1>
+            <a href="{{ url_for('main.home') }}"><i class="material-icons" style="font-size:44px;">home</i></a>
+            <a href="{{ url_for('main.image') }}"><i class="material-icons" style="font-size:44px;">refresh</i></a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <h2>Your image is of <strong>{{ name }}</strong> <small>({{ conf }}% confidence)</small></h2>
+        <table>
+            <thead>
+                <tr><th>Label</th><th>Confidence</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="image-label">Dog</td>        <td class="confidence">{{ dog }}%</td>         <td class="with-bar" style="--width: {{ dog }}%"></td>      </tr>
+                <tr><td class="image-label">Dolphin</td>    <td class="confidence">{{ dolphin }}%</td>     <td class="with-bar" style="--width: {{ dolphin }}%"></td>  </tr>
+                <tr><td class="image-label">Elephant</td>   <td class="confidence">{{ elephant }}%</td>    <td class="with-bar" style="--width: {{ elephant }}%"></td> </tr>
+                <tr><td class="image-label">Lizard</td>     <td class="confidence">{{ lizard }}%</td>      <td class="with-bar" style="--width: {{ lizard }}%"></td>   </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+{% endblock content %}
