@@ -24,7 +24,7 @@ Keras-Preprocessing==1.1.2
 Markdown==3.2.2
 MarkupSafe==1.1.1
 nltk==3.5
-numpy==1.19.0
+numpy==1.18.5
 oauthlib==3.1.0
 opt-einsum==3.2.1
 protobuf==3.12.2
@@ -40,7 +40,7 @@ scipy==1.4.1
 six==1.15.0
 tensorboard==2.2.2
 tensorboard-plugin-wit==1.7.0
-tensorflow-cpu==2.2.0
+tf-nightly-cpu==2.4.0.dev20200723
 tensorflow-estimator==2.2.0
 termcolor==1.1.0
 threadpoolctl==2.1.0

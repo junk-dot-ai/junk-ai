@@ -5,7 +5,7 @@ from keras.preprocessing import image
 from PIL import Image
 from io import BytesIO
 
-model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ckp2")
+model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ckp1")
 model = load_model(model_load_path)
 
 def load_image(img_file):
