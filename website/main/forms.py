@@ -9,5 +9,5 @@ class JunkMailForm(FlaskForm):
     submit = SubmitField('Detect')
 
 class ImageClassifierForm(FlaskForm):
-    content = FileField('Image File', validators=[FileAllowed(['jpg', 'jfif', 'png'])])
+    content = FileField('Image File', validators=[DataRequired(), FileAllowed(['jpg', 'jfif', 'png'])])
     submit = SubmitField('Detect')

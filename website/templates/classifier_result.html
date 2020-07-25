@@ -19,6 +19,9 @@
         {% endif %}
         {% endwith %}
 
+        <img src="data:image/png;base64, {{ image }}" style="margin: 20px auto 4px; display: block;">
+        <p style="text-align: center;">Your image after preprocessing</p>
+
         <h2>Your image is of <strong>{{ name }}</strong> <small>({{ conf }}% confidence)</small></h2>
         <table>
             <thead>

@@ -29,7 +29,7 @@ def percent(n):
 def image():
     form = ImageClassifierForm()
     if request.method == "POST" and form.validate():
-        result = predict_image(form.content.data)[0]
+        result, img_b64 = predict_image(form.content.data)
         dog, dolphin, elephant, lizard = result
         if max(result) == dog:
             name = "a dog"
@@ -40,7 +40,14 @@ def image():
         else:
             name = "a lizard"
         return render_template(
-            'classifier_result.html', title="Image AI", name=name, conf=percent(max(result)),
-            dog=percent(dog), dolphin=percent(dolphin), elephant=percent(elephant), lizard=percent(lizard)
+            'classifier_result.html',
+            title="Image AI",
+            name=name,
+            conf=percent(max(result)),
+            dog=percent(dog),
+            dolphin=percent(dolphin),
+            elephant=percent(elephant),
+            lizard=percent(lizard),
+            image=str(img_b64, 'utf-8'),
         )
     return render_template('image_classifier.html', title="Image AI", form=form)
