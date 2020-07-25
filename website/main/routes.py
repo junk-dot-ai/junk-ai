@@ -29,7 +29,7 @@ def percent(n):
 def image():
     form = ImageClassifierForm()
     if request.method == "POST" and form.validate():
-        result = predict_image(form.content.data.stream)[0]
+        result = predict_image(form.content.data)[0]
         dog, dolphin, elephant, lizard = result
         if max(result) == dog:
             name = "a dog"
