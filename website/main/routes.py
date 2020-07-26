@@ -6,7 +6,6 @@ import json
 
 main = Blueprint('main', __name__)
 
-
 @main.route("/")
 def home():
     return render_template('home.html', title="Home")
@@ -14,7 +13,7 @@ def home():
 @main.route("/text", methods=['GET', 'POST'])
 def text():
     form = JunkMailForm()
-    if request.method == "POST" and form.validate():
+    if form.validate_on_submit():
         if (predict_junk(form.content.data) > 0.5):
             flash("Junk!", "danger")
         else:
@@ -25,7 +24,7 @@ def text():
 @main.route("/image", methods=['GET', 'POST'])
 def image():
     form = ImageClassifierForm()
-    if request.method == "POST" and form.validate():
+    if form.validate_on_submit():
         prediction, class_to_confidence, img_b64 = predict_image(form.image.data, form.category.data)
         return render_template(
             'classifier_result.html',
