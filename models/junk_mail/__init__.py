@@ -88,8 +88,9 @@ def preprocess(text, tokenizer):
 
 
 def predict_junk(text):
+    # load model on predict to save memory at the cost of runtime
     model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "my_model.pb")
-    model = load_model(model_load_path)
+    model = load_model(model_load_path, compile=False)
 
     tokenizer_open_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokenizer.pickle")
     with open(tokenizer_open_path, 'rb') as handle:

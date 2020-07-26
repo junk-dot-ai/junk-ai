@@ -28,8 +28,9 @@ def load_image(img_file):
 
 
 def predict_image(img_data, category):
+    # load model on predict to save memory at the cost of runtime
     model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"{category}_model")
-    model = load_model(model_load_path)
+    model = load_model(model_load_path, compile=False)
 
     img_tensor, img_b64 = load_image(img_data)
 
