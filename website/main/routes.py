@@ -22,32 +22,17 @@ def text():
         return redirect(url_for('main.text'))
     return render_template('junk_mail.html', title="Junk Mail AI", form=form)
 
-def percent(n):
-    return round(n * 100, 1)
-
 @main.route("/image", methods=['GET', 'POST'])
 def image():
     form = ImageClassifierForm()
     if request.method == "POST" and form.validate():
-        result, img_b64 = predict_image(form.content.data)
-        dog, dolphin, elephant, lizard = result
-        if max(result) == dog:
-            name = "a dog"
-        elif max(result) == dolphin:
-            name = "a dolphin"
-        elif max(result) == elephant:
-            name = "an elephant"
-        else:
-            name = "a lizard"
+        prediction, class_to_confidence, img_b64 = predict_image(form.image.data, form.category.data)
         return render_template(
             'classifier_result.html',
             title="Image AI",
-            name=name,
-            conf=percent(max(result)),
-            dog=percent(dog),
-            dolphin=percent(dolphin),
-            elephant=percent(elephant),
-            lizard=percent(lizard),
+            category=form.category.data,
+            prediction=prediction,
+            class_to_confidence=class_to_confidence,
             image=str(img_b64, 'utf-8'),
         )
     return render_template('image_classifier.html', title="Image AI", form=form)

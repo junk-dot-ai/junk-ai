@@ -6,8 +6,12 @@ from keras.models import load_model
 from keras.preprocessing import image
 from PIL import Image
 
-model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ckp1")
-model = load_model(model_load_path)
+
+models_info = {
+    "animal": ['Dog', 'Dolphin', 'Elephant', 'Lizard'],
+    "object": ['Ball', 'Book', 'Bottle', 'Bowl', 'Chest of drawers', 'Coin', 'Flowerpot', 'Frying pan', 'Knife', 'Luggage and bags', 'Spoon']
+}
+
 
 def load_image(img_file):
     img = Image.open(img_file)
@@ -22,6 +26,18 @@ def load_image(img_file):
 
     return img_tensor, img_b64
 
-def predict_image(img_data):
+
+def predict_image(img_data, category):
+    model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"{category}_model")
+    model = load_model(model_load_path)
+
     img_tensor, img_b64 = load_image(img_data)
-    return model.predict(img_tensor, verbose=1)[0], img_b64
+
+    classes = models_info[category]
+    confidences = model.predict(img_tensor, verbose=1)[0]
+    confidences = map(lambda n: round(n * 100, 2), confidences)
+
+    class_to_confidence = dict(zip(classes, confidences)) # {"Dog": 96.29 ... }
+    prediction = max(class_to_confidence, key=class_to_confidence.get)
+
+    return prediction, class_to_confidence, img_b64

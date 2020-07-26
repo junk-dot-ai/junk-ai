@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="bg-light shadow p-5">
+    <div class="bg-light shadow p-sm-5 p-4">
         <div class="d-flex justify-content-between">
-            <h1>Image Classifier</h1>
+            <div>
+                <h1>Image Classifier</h1>
+                <h5>Category: {{ category }}</h5>
+            </div>
             <div>
                 <a href="{{ url_for('main.home') }}"><i class="material-icons" style="font-size:44px;">home</i></a>
                 <a href="{{ url_for('main.image') }}"><i class="material-icons" style="font-size:44px;">refresh</i></a>
@@ -10,28 +13,31 @@
         </div>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
 
         <img src="data:image/png;base64, {{ image }}" style="margin: 20px auto 4px; display: block;">
-        <p style="text-align: center;">Your image after preprocessing</p>
+        <p style="text-align: center;">Preprocessed Image</p>
 
-        <h2>Your image is of <strong>{{ name }}</strong> <small>({{ conf }}% confidence)</small></h2>
+        <h3>Prediction: <strong>{{ prediction }}</strong> <small>({{ class_to_confidence[prediction] }}% confidence)</small></h3>
         <table>
             <thead>
-                <tr><th>Label</th><th>Confidence</th></tr>
+                <tr><th>Class</th><th>Confidence</th></tr>
             </thead>
             <tbody>
-                <tr><td class="image-label">Dog</td>        <td class="confidence">{{ dog }}%</td>         <td class="with-bar" style="--width: {{ dog }}%"></td>      </tr>
-                <tr><td class="image-label">Dolphin</td>    <td class="confidence">{{ dolphin }}%</td>     <td class="with-bar" style="--width: {{ dolphin }}%"></td>  </tr>
-                <tr><td class="image-label">Elephant</td>   <td class="confidence">{{ elephant }}%</td>    <td class="with-bar" style="--width: {{ elephant }}%"></td> </tr>
-                <tr><td class="image-label">Lizard</td>     <td class="confidence">{{ lizard }}%</td>      <td class="with-bar" style="--width: {{ lizard }}%"></td>   </tr>
+                {% for class, confidence in class_to_confidence.items() %}
+                <tr>
+                    <td class="image-label">{{ class }}</td>
+                    <td class="confidence">{{ confidence }}%</td>
+                    <td class="with-bar" style="--width: {{ confidence }}%"></td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

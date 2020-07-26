@@ -14,13 +14,6 @@ from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS
 nltk.download('punkt')
 nltk.download('wordnet')
 
-model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "my_model.pb")
-model = load_model(model_load_path)
-
-tokenizer_open_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokenizer.pickle")
-with open(tokenizer_open_path, 'rb') as handle:
-    tokenizer = pickle.load(handle)
-
 
 # ------ Preprocess: per email ------
 
@@ -82,7 +75,8 @@ def clean_token_pipeline(words):
 
 # ------ Preprocess and Predict ------
 
-def preprocess(text):
+def preprocess(text, tokenizer):
+
     text = clean_up_pipeline(text)
     text = word_tokenize(text)
     text = clean_token_pipeline(text)
@@ -92,6 +86,14 @@ def preprocess(text):
 
     return text_features
 
+
 def predict_junk(text):
-    [[pred]] = model.predict(preprocess(text))
+    model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "my_model.pb")
+    model = load_model(model_load_path)
+
+    tokenizer_open_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokenizer.pickle")
+    with open(tokenizer_open_path, 'rb') as handle:
+        tokenizer = pickle.load(handle)
+
+    [[pred]] = model.predict(preprocess(text, tokenizer))
     return pred
