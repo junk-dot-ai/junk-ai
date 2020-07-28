@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-	<div class="content-section">
-		<h1>Access denied. (403)</h1>
-		<p>
-            You do not have permission to view this page.
+    <div class="content-section">
+        <h1>Bad gateway (502)</h1>
+        <p>
+            Something went wrong on our end. Try again later.
             <a href="{{ url_for('main.home') }}" class="return-home">Return to homepage.</a>
         </p>
-	</div>
+    </div>
 {% endblock content %}

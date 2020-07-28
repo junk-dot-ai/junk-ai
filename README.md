@@ -1,5 +1,5 @@
 # junk-ai
-Junk.ai
+See project on [junk.ai](https://junk.ai). Created during BrownConnect Summer Institute 2020.
 
 ### Setup
 **Use of virtual environment highly recommended.** Requires pip version >19.0 (`pip install --upgrade pip`):

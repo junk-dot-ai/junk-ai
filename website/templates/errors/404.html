@@ -2,6 +2,9 @@
 {% block content %}
 	<div class="content-section">
 		<h1>Oops. Page not found (404)</h1>
-		<p>The page requested does not exist.</p>
+		<p>
+            The page requested does not exist.
+            <a href="{{ url_for('main.home') }}" class="return-home">Return to homepage.</a>
+        </p>
 	</div>
 {% endblock content %}
