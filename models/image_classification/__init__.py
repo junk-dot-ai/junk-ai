@@ -5,12 +5,18 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing import image
 from PIL import Image
+import resource
 
 
 models_info = {
     "animal": ['Dog', 'Dolphin', 'Elephant', 'Lizard'],
     "object": ['Ball', 'Book', 'Bottle', 'Bowl', 'Chest of drawers', 'Coin', 'Flowerpot', 'Frying pan', 'Knife', 'Luggage and bags', 'Spoon']
 }
+
+models = dict()
+for category in models_info:
+    model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"{category}_model")
+    models[category] = load_model(model_load_path, compile=False)
 
 
 def load_image(img_file):
@@ -28,17 +34,16 @@ def load_image(img_file):
 
 
 def predict_image(img_data, category):
-    # load model on predict to save memory at the cost of runtime
-    model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"{category}_model")
-    model = load_model(model_load_path, compile=False)
+    print(f"PREDICTING IMAGE | MEMORY {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}")
 
     img_tensor, img_b64 = load_image(img_data)
 
     classes = models_info[category]
-    confidences = model.predict(img_tensor, verbose=1)[0]
-    confidences = map(lambda n: round(n * 100, 2), confidences)
+    confidences = models[category](img_tensor)[0]
+    confidences = map(lambda n: round(n * 100, 2), np.array(confidences))
 
     class_to_confidence = dict(zip(classes, confidences)) # {"Dog": 96.29 ... }
     prediction = max(class_to_confidence, key=class_to_confidence.get)
 
+    print(f"PREDICTION: {prediction}")
     return prediction, class_to_confidence, img_b64

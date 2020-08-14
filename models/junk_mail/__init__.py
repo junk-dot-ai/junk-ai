@@ -9,10 +9,18 @@ from keras.preprocessing.sequence import pad_sequences
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS
+import resource
 
 
 nltk.download('punkt')
 nltk.download('wordnet')
+
+model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "my_model.pb")
+model = load_model(model_load_path, compile=False)
+
+tokenizer_open_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokenizer.pickle")
+with open(tokenizer_open_path, 'rb') as handle:
+    tokenizer = pickle.load(handle)
 
 
 # ------ Preprocess: per email ------
@@ -88,13 +96,8 @@ def preprocess(text, tokenizer):
 
 
 def predict_junk(text):
-    # load model on predict to save memory at the cost of runtime
-    model_load_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "my_model.pb")
-    model = load_model(model_load_path, compile=False)
+    print(f"PREDICTING JUNK | MEMORY {resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}")
+    [[pred]] = model(preprocess(text, tokenizer))
 
-    tokenizer_open_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tokenizer.pickle")
-    with open(tokenizer_open_path, 'rb') as handle:
-        tokenizer = pickle.load(handle)
-
-    [[pred]] = model.predict(preprocess(text, tokenizer))
+    print(f"PREDICTION: {pred}")
     return pred
