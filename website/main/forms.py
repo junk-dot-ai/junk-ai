@@ -16,5 +16,5 @@ class ImageClassifierForm(FlaskForm):
         validators=[DataRequired()])
     image = FileField('Image File',
         validators=[DataRequired(),
-        FileAllowed(['jpg', 'jfif', 'png'])])
+        FileAllowed(['jpg', 'jpeg', 'jfif', 'png'])])
     submit = SubmitField('Detect')
